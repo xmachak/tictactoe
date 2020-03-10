@@ -78,6 +78,9 @@ class Game:
 
         self.grid.print_grid()
 
+    def __is_valid_player(self, player):
+
+
     def __is_valid_turn(self, move):
         """
         Determine ig a user's input results in a valid turn.
