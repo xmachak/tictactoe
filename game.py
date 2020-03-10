@@ -21,7 +21,11 @@ class Player:
 
 class Grid:
     """
+    Hold the state of the grid.
 
+    Attributes:
+        name (str): A player's name, as input by the user.
+        badge (str): A player's badge, either X or O. Assigned based on order of input.
     """
 
     def __init__(self, rows, cols):
@@ -67,7 +71,9 @@ class Game:
 
     def start_game(self):
         """Start the game by printing prompts for user to input player names,
-        prints the empty game board grid and instructions."""
+            prints the empty game board grid and instructions.
+        """
+
         player1 = Player(input("Who is the first player? "), 'X')
         player2 = Player(input("Who is the second player? "), 'O')
 
@@ -84,9 +90,10 @@ class Game:
 
     def __is_valid_turn(self, move):
         """
-        Determine ig a user's input results in a valid turn.
-        :param move:
-        :return:
+        Determine if a user's input results in a valid turn.
+
+        Attributes:
+            move (array[str]): A move as input by the player.
         """
         # the user entered nothing
         if move == '':
@@ -108,9 +115,9 @@ class Game:
 
     def take_turn(self, try_again=False):
         """
-
-        :param try_again:
-        :return:
+        Execute the logic for a player's turn conditional of a valid move.
+        Attributes:
+            try_again (Boolean): a flag for whether or not to prompt the user to try again
         """
         if try_again:
             move = input(f'Invalid move {self.current_player.name}. Try again :')
@@ -126,22 +133,25 @@ class Game:
             self.take_turn(try_again=True)
 
     def __switch_player(self):
-        """
-        Switch from one player as current player to the other.
-        :return: None
-        """
+        """Switch from one player as current player to the other."""
         if self.current_player == self.players[0]:
             self.current_player = self.players[1]
         else:
             self.current_player = self.players[0]
 
     def __check_for_win(self, ind_keys):
+        """
+        Check to see if there is a winning streak on the board.
+        Attributes:
+            ind_keys(list[(str,str)]): a list of keys (corresponding to dictionary grid) to test for a win
+        """
         if all([self.grid.grid[(x, y)] == self.grid.grid[ind_keys[0]] for (x, y) in ind_keys]) \
                 and self.grid.grid[ind_keys[0]] != ' ':
             print(f'Game Over! The winner is {self.current_player.name}!')
             self.game_over = True
 
     def __check_state(self):
+        """Check the current grid to see if there is a win or a tie."""
 
         # check for tie
         if len([badge for badge in self.grid.grid.values() if badge == ' ']) == 0:
