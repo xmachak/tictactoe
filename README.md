@@ -6,4 +6,5 @@ To play the game, run:
 git clone git@github.com:xmachak/tictactoe.git
 cd tictactoe
 pipenv install
+pipenv run python game.py 
 ```
