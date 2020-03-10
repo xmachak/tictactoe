@@ -9,4 +9,3 @@ verify_ssl = true
 numpy = "*"
 
 [requires]
-python_version = "3.6"
