@@ -34,7 +34,7 @@ class Grid:
 
     def print_grid(self):
         """Print the current game grid including the location of past players' moves."""
-        print(f"    1   2   3 ")
+        print("    1   2   3 ")
         print(f"    .   .   . ")
         print(f"a . {self.grid['a', '1']} | {self.grid['a', '2']} | {self.grid['a', '3']} ")
         print(f"   ---|---|---")
@@ -77,9 +77,6 @@ class Game:
         print("-----------------------------------------------------------------------------------------------")
 
         self.grid.print_grid()
-
-    def __is_valid_player(self, player):
-
 
     def __is_valid_turn(self, move):
         """
