@@ -35,7 +35,7 @@ class Grid:
     def print_grid(self):
         """Print the current game grid including the location of past players' moves."""
         print("    1   2   3 ")
-        print(f"    .   .   . ")
+        print("    .   .   . ")
         print(f"a . {self.grid['a', '1']} | {self.grid['a', '2']} | {self.grid['a', '3']} ")
         print(f"   ---|---|---")
         print(f"b . {self.grid['b', '1']} | {self.grid['b', '2']} | {self.grid['b', '3']} ")
