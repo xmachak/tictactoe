@@ -1,4 +1,3 @@
-import numpy as np
 import random
 
 # The game will be played in a 3x3 grid
@@ -21,16 +20,21 @@ class Player:
 
 
 class Grid:
+    """
+
+    """
 
     def __init__(self, rows, cols):
-        self.rows = rows
-        self.cols = cols
-        self.ord_a = 97  # integer corresponding to the unicode character 'a'
-        self.row_indices = [chr(i) for i in range(self.ord_a, self.ord_a + rows)]
+        self.row_indices = [chr(i) for i in range(ord('a'), ord('a') + rows)]
         self.col_indices = [str(i) for i in range(1, cols + 1)]
-        self.grid_keys = list(zip(list(np.repeat([chr(i) for i in range(self.ord_a, self.ord_a + rows)], cols)),
-                                  [str(i) for i in range(1, cols + 1)] * rows))
-        self.grid = {key: ' ' for key in self.grid_keys}
+        grid_keys = list(zip([self.row_indices[i//cols] for i in range(rows*cols)], self.col_indices * rows))
+        self.grid = {key: ' ' for key in grid_keys}
+
+    def rows(self):
+        return len(self.row_indices)
+
+    def cols(self):
+        return len(self.col_indices)
 
     def print_grid(self):
         """Print the current game grid including the location of past players' moves."""
@@ -146,11 +150,11 @@ class Game:
 
         # check for a horizontal win
         for ind in self.grid.row_indices:
-            self.__check_for_win(list(zip([ind]*self.grid.cols, self.grid.col_indices)))
+            self.__check_for_win(list(zip([ind]*self.grid.cols(), self.grid.col_indices)))
 
         # check for a vertical win
         for ind in self.grid.col_indices:
-            self.__check_for_win(list(zip(self.grid.row_indices, [ind]*self.grid.rows)))
+            self.__check_for_win(list(zip(self.grid.row_indices, [ind]*self.grid.rows())))
 
         # check for a left to right diagonal win
         self.__check_for_win(list(zip(self.grid.row_indices, self.grid.col_indices)))
